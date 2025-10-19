@@ -2,7 +2,8 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 import Chatbot from "../components/Chatbot";
 import products from "../data/products";
-import Home from "./home.css"
+import '../home.css';
+
 
 
 
