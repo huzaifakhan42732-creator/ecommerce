@@ -2,7 +2,9 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 import Chatbot from "../components/Chatbot";
 import products from "../data/products";
-import "./Home.css";
+import Home from "./home.css"
+
+
 
 const Home = () => {
   return (
