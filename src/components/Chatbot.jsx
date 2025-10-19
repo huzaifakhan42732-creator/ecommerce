@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import "./Chatbot.css";
+import "./chatbot.css";
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
