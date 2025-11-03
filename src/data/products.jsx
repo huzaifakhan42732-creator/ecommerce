@@ -47,6 +47,48 @@ const products = [
     price: "$350",
     image: "https://tse4.mm.bing.net/th/id/OIP.ELRMVEcxAMTRt9CReO0vAgHaEK?pid=Api&P=0&h=220",
   },
+    {
+    id: 9,
+    name: "Rolex Watch",
+    price: "$35",
+    image: "https://tse2.mm.bing.net/th/id/OIP.MUClOp6Vj7dC9Q45ZDvlSQHaHa?pid=Api&P=0&h=220",
+  },
+    {
+    id: 10,
+    name: "Dell Laptop",
+    price: "$3000",
+    image: "https://tse3.mm.bing.net/th/id/OIP.lyCuCfRxZCqY2McUNcsMiQHaFj?pid=Api&P=0&h=220",
+  },
+    {
+    id: 11,
+    name: "Bottle",
+    price: "$50",
+    image: "https://tse2.mm.bing.net/th/id/OIP.F4CTwNOg9OFrYt4e50ctkwHaFj?pid=Api&P=0&w=300&h=300",
+  },
+    {
+    id: 12,
+    name: "Gaming Chair",
+    price: "$500",
+    image: "https://tse3.mm.bing.net/th/id/OIP.bvAFfZxougjrX6XTJ0SV-gHaJ4?pid=Api&P=0&h=220",
+  },
+    {
+    id: 13,
+    name: "Light",
+    price: "$150",
+    image: "https://tse2.mm.bing.net/th/id/OIP.MJOAWXgVqGWgRY8kbI8hfQHaHa?pid=Api&P=0&h=220",
+  },
+    {
+    id: 14,
+    name: "Fan",
+    price: "$310",
+    image: "https://tse1.mm.bing.net/th/id/OIP.l39HBqf7u7Sn7KR-HuVGEwHaHa?pid=Api&P=0&h=220",
+  },
+    {
+    id: 15,
+    name: "Scanner",
+    price: "$200",
+    image: "https://tse3.mm.bing.net/th/id/OIP.G268ps7hbz2qlCql78s4JAHaHH?pid=Api&P=0&h=220",
+  },
 ];
 
 export default products;

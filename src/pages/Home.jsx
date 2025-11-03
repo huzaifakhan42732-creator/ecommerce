@@ -1,11 +1,8 @@
 import React from "react";
-import ProductCard from "../components/ProductCard";
-import Chatbot from "../components/Chatbot";
+import ProductCard from "../components/ProductCard.jsx";
+import Chatbot from "../components/Chatbot.jsx";
 import products from "../data/products";
 import './home.css';
-
-
-
 
 const Home = () => {
   return (
@@ -19,6 +16,7 @@ const Home = () => {
         {products.map((p) => (
           <ProductCard
             key={p.id}
+            id={p.id}      
             name={p.name}
             price={p.price}
             image={p.image}
@@ -35,3 +33,4 @@ const Home = () => {
 };
 
 export default Home;
+

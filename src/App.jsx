@@ -1,52 +1,94 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
+import ProductCard from "./components/ProductCard.jsx";
+import ProductDetails from "./components/Productdetails.jsx";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import Chatbot from "./components/Chatbot.jsx";
+import axios from "axios";
 
 function App() {
-  const [user, setUser] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("user")) || null;
-    } catch {
-      return null;
-    }
-  });
+  const [products, setProducts] = useState([]);
 
-  const navigate = useNavigate();
-
+  // Check backend connection once (only log it)
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-    } else {
-      navigate("/home");
-    }
-  }, [user, navigate]);
+    axios
+      .get("http://localhost:5000/")
+      .then((res) => console.log(" Backend Connected:", res.data))
+      .catch((err) => console.error(" Backend not connected:", err));
+  }, []);
 
-  const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  //  Fetch products from backend
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/products");
+        setProducts(res.data);
+        console.log("Fetched products:", res.data);
+      } catch (err) {
+        console.log("Error fetching products:", err);
+      }
+    };
+    getProducts();
+  }, []);
+
+  //  Local state updates
+  const handleAdd = (newProduct) => {
+    setProducts([...products, { ...newProduct, id: Date.now() }]);
   };
 
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-    navigate("/");
+  const handleEdit = (id, updatedData) => {
+    setProducts(products.map((p) => (p.id === id ? { ...p, ...updatedData } : p)));
+  };
+
+  const handleDelete = (id) => {
+    setProducts(products.filter((p) => p.id !== id));
   };
 
   return (
     <div className="app-root">
-      {/* Navbar & Footer appear only when user is logged in */}
-      {user && <Navbar onLogout={handleLogout} />}
+      <Navbar />
 
       <Routes>
-        <Route path="/" element={<Login onLogin={handleLogin} />} />
-        <Route path="/home" element={<Home user={user} onLogout={handleLogout} />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home products={products} />} />
+
+        {/* Product Dashboard */}
+        <Route
+          path="/products"
+          element={
+            <div className="product-page">
+              <h1>🛍 Product Dashboard</h1>
+              <div className="product-grid">
+                {products.map((p) => (
+                  <ProductCard key={p.id} {...p} />
+                ))}
+              </div>
+            </div>
+          }
+        />
+
+        <Route
+          path="/product/:id"
+          element={
+            <ProductDetails
+              products={products}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onAdd={handleAdd}
+            />
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
 
-      {user && <Footer />}
+      <Chatbot />
+      <Footer />
     </div>
   );
 }
